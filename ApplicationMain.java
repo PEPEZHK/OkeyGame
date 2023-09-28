@@ -113,7 +113,11 @@ public class ApplicationMain {
                     playerChoice = sc.nextInt();
 
                     // TODO: make sure the given index is correct, should be 0 <= index <= 14
-
+                    while(playerChoice <0 || playerChoice >14){
+                        System.out.println("This index is not MEANINGFUL, please enter another index which should be at the interval of 0 <= index <= 14");
+                        playerChoice = sc.nextInt();
+                    }
+                    
                     game.discardTile(playerChoice);
                     game.passTurnToNextPlayer();
                 }

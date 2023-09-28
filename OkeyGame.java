@@ -97,7 +97,19 @@ public class OkeyGame {
      * known by other players
      */
     public void discardTileForComputer() {
+        int minChainVal = 1000;
+        int indexOfUselessTile = 0;
+        Player currentPlayer = players[currentPlayerIndex];
 
+
+        for(int k=0; k< players[currentPlayerIndex].playerTiles.length; k++){
+            if(currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]) < minChainVal){
+                minChainVal = currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]);
+                indexOfUselessTile = k;
+            }
+        }   
+        currentPlayer.getAndRemoveTile(indexOfUselessTile);
+        System.out.println("The discarded tile is :" + currentPlayer.playerTiles[indexOfUselessTile]);
     }
 
     /*
@@ -106,7 +118,7 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
+        lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
     }
 
     public void currentPlayerSortTilesColorFirst() {
