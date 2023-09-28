@@ -81,7 +81,14 @@ public class OkeyGame {
      * TODO: should randomly shuffle the tiles array before game starts
      */
     public void shuffleTiles() {
-
+        Random rand = new Random();
+		for (int i = 0; i < tiles.length; i++) 
+        {
+			int r = rand.nextInt(tiles.length);
+			Tile temp = tiles[r];
+			tiles[r] = tiles[i];
+			tiles[i] = temp;
+		}
     }
 
     /*
@@ -108,7 +115,23 @@ public class OkeyGame {
      * the current status. Print whether computer picks from tiles or discarded ones.
      */
     public void pickTileForComputer() {
-
+        Random rand = new Random();
+        int r = rand.nextInt(2);
+        switch (r) 
+        {
+            case 0: String topTile = getTopTile(); 
+            int newFromTopValue = Integer.parseInt(topTile.substring(0, topTile.length() - 1));
+            char newFromTopColor = topTile.charAt(topTile.length() - 1);
+            Tile newTopTile = new Tile(newFromTopValue, newFromTopColor); 
+            players[currentPlayerIndex].addTile(newTopTile);
+            break;
+            
+            case 1: String discardedTile = getLastDiscardedTile(); 
+            int newFromDiscardedValue = Integer.parseInt(discardedTile.substring(0, discardedTile.length() - 1));
+            char newFromDiscardedColor = discardedTile.charAt(discardedTile.length() - 1);
+            Tile newDiscardedTile = new Tile(newFromDiscardedValue, newFromDiscardedColor);
+            players[currentPlayerIndex].addTile(newDiscardedTile);
+        }
     }
 
     /*
