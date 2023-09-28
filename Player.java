@@ -86,7 +86,15 @@ public class Player {
      * have more than 15 tiles at a time
      */
     public void addTile(Tile t) {
-
+        if (numberOfTiles == playerTiles.length) 
+        {
+            System.out.println("You can not have more than 15 tiles");
+        }
+        else 
+        {
+            playerTiles[numberOfTiles] = t ;
+            numberOfTiles ++ ;
+        }
     }
 
     /*
@@ -99,7 +107,18 @@ public class Player {
      * you are allowed to use Collections.sort method
      */
     public void sortTilesColorFirst() {
-        
+        for (int i = 0 ; i < playerTiles.length - 1; i++) 
+        {
+            for (int j = 0 ; j < playerTiles.length - i - 1 ; j++) 
+            {
+                if (playerTiles[j].compareToColorFirst(playerTiles[j+1]) > 0) 
+                {
+                    Tile temp = playerTiles[j] ;
+                    playerTiles[j] = playerTiles[j+1] ;
+                    playerTiles[j+1] = temp ;
+                } 
+            }
+        }
     }
 
     /*
@@ -112,7 +131,18 @@ public class Player {
      * you are allowed to use Collections.sort method
      */
     public void sortTilesValueFirst() {
-
+        for (int i = 0 ; i < playerTiles.length - 1; i++) 
+        {
+            for (int j = 0 ; j < playerTiles.length - i - 1 ; j++) 
+            {
+                if (playerTiles[j].compareToValueFirst(playerTiles[j+1]) > 0) 
+                {
+                    Tile temp = playerTiles[j] ;
+                    playerTiles[j] = playerTiles[j+1] ;
+                    playerTiles[j+1] = temp ;
+                } 
+            }
+        }
     }
 
     public int findPositionOfTile(Tile t) {
