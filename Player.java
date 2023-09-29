@@ -58,12 +58,59 @@ public class Player {
         // TODO: find the longest chain starting from tilePosition going left and right
         int longestChainColorFirst = 0;
 
+        int tempPosition = tilePosition;
+        boolean goFurther = true;
+        while(goFurther){
+            if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 1 && !(tilePosition <= 0 || tilePosition >= 0)){
+                longestChainColorFirst++;
+                tilePosition++;
+            }
+            else{
+                goFurther = false;
+            }
+        }
+        goFurther = true;
+        tilePosition = tempPosition;
+        while(goFurther){
+            if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 1 && !(tilePosition <= 0 || tilePosition >= 0)){
+                longestChainColorFirst++;
+                tilePosition--;
+            }
+            else{
+                goFurther = false;
+            }
+        }
+        goFurther = true;
+        tilePosition = tempPosition;
+
         sortTilesValueFirst();
         tilePosition = findPositionOfTile(t);
         
         // TODO: find the longest chain starting from tilePosition going left and right
         int longestChainValueFirst = 0;
 
+        while(goFurther){
+            if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 2 && !(tilePosition <= 0 || tilePosition >= 0)){
+                longestChainValueFirst++;
+                tilePosition++;
+            }
+            else{
+                goFurther = false;
+            }
+        }
+        goFurther = true;
+        tilePosition = tempPosition;
+        while(goFurther){
+            if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 2 && !(tilePosition <= 0 || tilePosition >= 0)){
+                longestChainValueFirst++;
+                tilePosition--;
+            }
+            else{
+                goFurther = false;
+            }
+        }
+        goFurther = true;
+        tilePosition = tempPosition;
 
         if(longestChainColorFirst > longestChainValueFirst) {
             return longestChainColorFirst;
@@ -77,7 +124,14 @@ public class Player {
      * TODO: removes and returns the tile in given index
      */
     public Tile getAndRemoveTile(int index) {
-        return null;
+        Tile tile = playerTiles[index];
+        playerTiles[index] = null;
+        for (int i = index; i < playerTiles.length - 1; i++) {
+            playerTiles[i] = playerTiles[i+1];
+        }
+        playerTiles[playerTiles.length - 1] = null;
+        numberOfTiles--;
+        return tile;
     }
 
     /*
