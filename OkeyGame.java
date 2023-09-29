@@ -197,7 +197,12 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-        lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
+        if(currentPlayerIndex==0){
+        lastDiscardedTile = players[3].getAndRemoveTile(tileIndex);
+        }
+        else{
+        lastDiscardedTile = players[currentPlayerIndex-1].getAndRemoveTile(tileIndex);
+        }
     }
 
     public void currentPlayerSortTilesColorFirst() {

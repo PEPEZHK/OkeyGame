@@ -62,9 +62,14 @@ public class Player {
         int tempPosition = tilePosition;
         boolean goFurther = true;
         while(goFurther){
-            if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 1 && !(tilePosition <= 0 || tilePosition >= 0)){
-                longestChainColorFirst++;
-                tilePosition++;
+            if((tilePosition > 0 && tilePosition < numberOfTiles-1)){
+                if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 1 ){
+                    longestChainColorFirst++;
+                    tilePosition++;
+                }
+                else{
+                    goFurther = false;
+                }
             }
             else{
                 goFurther = false;
@@ -73,9 +78,14 @@ public class Player {
         goFurther = true;
         tilePosition = tempPosition;
         while(goFurther){
-            if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 1 && !(tilePosition <= 0 || tilePosition >= 0)){
-                longestChainColorFirst++;
-                tilePosition--;
+            if((tilePosition > 0 && tilePosition < numberOfTiles-1)){
+                if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 1){
+                    longestChainColorFirst++;
+                    tilePosition--; 
+                }
+                else{
+                    goFurther = false;
+                }
             }
             else{
                 goFurther = false;
@@ -91,9 +101,14 @@ public class Player {
         int longestChainValueFirst = 0;
 
         while(goFurther){
-            if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 2 && !(tilePosition <= 0 || tilePosition >= 0)){
-                longestChainValueFirst++;
-                tilePosition++;
+            if((tilePosition > 0 && tilePosition < numberOfTiles-1)){
+                if(playerTiles[tilePosition+1].canFormChainWith(playerTiles[tilePosition]) == 2){
+                    longestChainValueFirst++;
+                    tilePosition++;
+                }
+                else{
+                    goFurther = false;
+                }
             }
             else{
                 goFurther = false;
@@ -102,9 +117,14 @@ public class Player {
         goFurther = true;
         tilePosition = tempPosition;
         while(goFurther){
-            if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 2 && !(tilePosition <= 0 || tilePosition >= 0)){
-                longestChainValueFirst++;
-                tilePosition--;
+            if((tilePosition > 0 && tilePosition < numberOfTiles-1)){
+                if(playerTiles[tilePosition-1].canFormChainWith(playerTiles[tilePosition]) == 2){
+                    longestChainValueFirst++;
+                    tilePosition--;
+                }
+                else{
+                    goFurther = false;
+                }
             }
             else{
                 goFurther = false;
@@ -132,6 +152,7 @@ public class Player {
         }
         playerTiles[playerTiles.length - 1] = null;
         numberOfTiles--;
+        Arrays.toString(playerTiles);
         return tile;
     }
 
@@ -162,9 +183,9 @@ public class Player {
      * you are allowed to use Collections.sort method
      */
     public void sortTilesColorFirst() {
-        for (int i = 0 ; i < numberOfTiles - i - 1; i++) 
+        for (int i = 0 ; i < numberOfTiles - 1; i++) 
         {
-            for (int j = 0 ; j < numberOfTiles - i - 1 ; j++) 
+            for (int j = 0 ; j < numberOfTiles - 1 - i ; j++) 
             {
                 if (playerTiles[j].compareToColorFirst(playerTiles[j+1]) > 0) 
                 {
