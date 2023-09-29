@@ -107,6 +107,29 @@ public class OkeyGame {
      * for this simplified version
      */
     public boolean didGameFinish() {
+	int counter3 = 0;
+        int counter4 = 0;
+        int counter5 = 0;
+        int[] longestChains = new int[players[currentPlayerIndex].playerTiles.length];
+        for (int i = 0; i < longestChains.length; i++)
+        {
+            if (longestChains[i] == 3)
+            {
+                counter3++;
+            }
+            else if (longestChains[i] == 4)
+            {
+                counter4++;
+            }
+            else if (longestChains[i] == 5)
+            {
+                counter5++;
+            }
+        }
+        if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
+        {
+            return true;
+        }
         return false;
     }
 
