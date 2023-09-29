@@ -179,7 +179,7 @@ public class OkeyGame {
         Player currentPlayer = players[currentPlayerIndex];
 
 
-        for(int k=0; k< players[currentPlayerIndex].playerTiles.length; k++){
+        for(int k=0; k< players[currentPlayerIndex].playerTiles.numberOfTiles; k++){
             if(currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]) < minChainVal){
                 minChainVal = currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]);
                 indexOfUselessTile = k;
