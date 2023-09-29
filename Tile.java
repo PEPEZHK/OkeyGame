@@ -19,7 +19,7 @@ public class Tile {
      * return true if they are matching, false otherwise
      */
     public boolean matchingTiles(Tile t) {
-        return false;
+        return this.getColor() == t.getColor() && this.getValue() == this.getValue() ;
     }
 
     public int compareToColorFirst(Tile t) {
