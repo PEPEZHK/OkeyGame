@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Player {
     String playerName;
     Tile[] playerTiles;
@@ -161,9 +162,9 @@ public class Player {
      * you are allowed to use Collections.sort method
      */
     public void sortTilesColorFirst() {
-        for (int i = 0 ; i < playerTiles.length - 1; i++) 
+        for (int i = 0 ; i < playerTiles.length - 2; i++) 
         {
-            for (int j = 0 ; j < playerTiles.length - i - 1 ; j++) 
+            for (int j = 0 ; j < playerTiles.length - i - 2 ; j++) 
             {
                 if (playerTiles[j].compareToColorFirst(playerTiles[j+1]) > 0) 
                 {
@@ -185,9 +186,9 @@ public class Player {
      * you are allowed to use Collections.sort method
      */
     public void sortTilesValueFirst() {
-        for (int i = 0 ; i < playerTiles.length - 1; i++) 
+        for (int i = 0 ; i < playerTiles.length - 2; i++) 
         {
-            for (int j = 0 ; j < playerTiles.length - i - 1 ; j++) 
+            for (int j = 0 ; j < playerTiles.length - i - 2 ; j++) 
             {
                 if (playerTiles[j].compareToValueFirst(playerTiles[j+1]) > 0) 
                 {

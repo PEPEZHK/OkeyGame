@@ -45,15 +45,14 @@ public class OkeyGame {
                 players[i].addTile(tiles[j]);
                 count++;
                 j++;
-                i++;
                 }
             }
             else{
-                while(count!=13)
+                while(count!=13){
                 players[i].addTile(tiles[j]);
                 count++;
                 j++;
-                i++;
+                }
             }
         }
         for (int i = 0; i < 48; i++) {
