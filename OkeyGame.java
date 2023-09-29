@@ -67,7 +67,9 @@ public class OkeyGame {
      * it should return the toString method of the tile so that we can print what we picked
      */
     public String getLastDiscardedTile() {
-         return lastDiscardedTile +"";
+        currentPlayerIndex = getCurrentPlayerIndex();
+        players[currentPlayerIndex].addTile(lastDiscardedTile);
+        return lastDiscardedTile +"";
     }
 
     /*
@@ -179,7 +181,7 @@ public class OkeyGame {
         Player currentPlayer = players[currentPlayerIndex];
 
 
-        for(int k=0; k< players[currentPlayerIndex].playerTiles.numberOfTiles; k++){
+        for(int k=0; k< players[currentPlayerIndex].numberOfTiles; k++){
             if(currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]) < minChainVal){
                 minChainVal = currentPlayer.findLongestChainOf(currentPlayer.playerTiles[k]);
                 indexOfUselessTile = k;
