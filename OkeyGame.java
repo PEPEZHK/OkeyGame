@@ -40,14 +40,20 @@ public class OkeyGame {
         int j=0;
         for( int i=0 ; i<players.length; i++){
             int count=0;
-            if(i==0 && count!=14){
+            if(i==0){
+                while(count!=14){
                 players[i].addTile(tiles[j]);
+                count++;
                 j++;
+                i++;
+                }
             }
             else{
-                while(j!=13)
+                while(count!=13)
                 players[i].addTile(tiles[j]);
+                count++;
                 j++;
+                i++;
             }
         }
         for (int i = 0; i < 48; i++) {
