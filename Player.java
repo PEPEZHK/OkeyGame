@@ -152,7 +152,7 @@ public class Player {
         }
         playerTiles[playerTiles.length - 1] = null;
         numberOfTiles--;
-        Arrays.toString(playerTiles);
+        System.out.println(Arrays.toString(playerTiles));
         return tile;
     }
 
