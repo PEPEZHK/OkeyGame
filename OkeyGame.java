@@ -114,7 +114,7 @@ public class OkeyGame {
      * for this simplified version
      */
     public boolean didGameFinish() {
-	int counter3 = 0;
+	    int counter3 = 0;
         int counter4 = 0;
         int counter5 = 0;
         int[] longestChains = new int[players[currentPlayerIndex].playerTiles.length];
@@ -188,7 +188,8 @@ public class OkeyGame {
             }
         }   
         currentPlayer.getAndRemoveTile(indexOfUselessTile);
-        System.out.println("The discarded tile is :" + currentPlayer.playerTiles[indexOfUselessTile]);
+        lastDiscardedTile = currentPlayer.playerTiles[indexOfUselessTile];
+        System.out.println("The discarded tile is :" + lastDiscardedTile);
     }
 
     /*
@@ -197,9 +198,8 @@ public class OkeyGame {
      * that player's tiles
      */
     public void discardTile(int tileIndex) {
-
-    lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
-        
+        lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
+        System.out.println(lastDiscardedTile);
     }
 
     public void currentPlayerSortTilesColorFirst() {
