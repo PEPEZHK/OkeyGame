@@ -162,15 +162,17 @@ public class Player {
      * have more than 15 tiles at a time
      */
     public void addTile(Tile t) {
-        if (numberOfTiles == playerTiles.length) 
+        /*if (numberOfTiles == playerTiles.length) 
         {
             System.out.println("You can not have more than 15 tiles");
         }
-        else 
+        else */
+        if (numberOfTiles <= playerTiles.length-1)
         {
             playerTiles[numberOfTiles] = t ;
             numberOfTiles ++ ;
         }
+        
     }
 
     /*
