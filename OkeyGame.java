@@ -189,7 +189,7 @@ public class OkeyGame {
         }   
         currentPlayer.getAndRemoveTile(indexOfUselessTile);
         lastDiscardedTile = currentPlayer.playerTiles[indexOfUselessTile];
-        System.out.println("The discarded tile is :" + lastDiscardedTile);
+        System.out.println("The discarded tile is : " + lastDiscardedTile);
     }
 
     /*
@@ -199,7 +199,7 @@ public class OkeyGame {
      */
     public void discardTile(int tileIndex) {
         lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
-        System.out.println(lastDiscardedTile);
+        System.out.println("The discarded tile is : " + lastDiscardedTile);
     }
 
     public void currentPlayerSortTilesColorFirst() {
