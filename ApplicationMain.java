@@ -6,6 +6,8 @@ public class ApplicationMain {
         Scanner sc = new Scanner(System.in);
         OkeyGame game = new OkeyGame();
 
+        System.out.println("WELCOME THE OKEY GAME");
+        System.out.println("---------------------");
         System.out.print("Please enter your name: ");
         String playerName = sc.next();
 
@@ -29,11 +31,14 @@ public class ApplicationMain {
 
         boolean sortColorAfterPicking = false;
         boolean sortValueAfterPicking = false;
+        
+        System.out.println("---------------------");
+        System.out.println("Game is starting!");
 
         while(gameContinues) {
             
             int currentPlayer = game.getCurrentPlayerIndex();
-            System.out.println(game.getCurrentPlayerName() + "'s turn.");
+            System.out.println("\n" + game.getCurrentPlayerName() + "'s turn.");
             
             if(currentPlayer == 0) {
                 // this is the human player's turn

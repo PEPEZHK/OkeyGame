@@ -1,6 +1,6 @@
 import java.util.Arrays;
 import java.util.Random;
-
+import java.util.ArrayList;
 public class OkeyGame {
 
     Player[] players;
@@ -42,9 +42,9 @@ public class OkeyGame {
             int count=0;
             if(i==0){
                 while(count!=15){
-                players[i].addTile(tiles[j]);
-                count++;
-                j++;
+                    players[i].addTile(tiles[j]);
+                    count++;
+                    j++;
                 }
             }
             else{
@@ -79,8 +79,8 @@ public class OkeyGame {
      */
     public String getTopTile() {
         currentPlayerIndex = getCurrentPlayerIndex();
-        players[currentPlayerIndex].addTile(tiles[tiles.length-1]);
         Tile pickedTile = tiles[tiles.length-1];
+        players[currentPlayerIndex].addTile(tiles[tiles.length-1]);
         Tile[] newTiles = new Tile[tiles.length-1];
         System.arraycopy(tiles, 0, newTiles, 0, tiles.length-1);
         tiles = newTiles;
@@ -114,30 +114,171 @@ public class OkeyGame {
      * for this simplified version
      */
     public boolean didGameFinish() {
+        boolean control=true;
+        ArrayList<Tile> Color = new ArrayList<>();
+        ArrayList<Tile> Number = new ArrayList<>();
+        int counter=0;
+        players[currentPlayerIndex].sortTilesColorFirst();
+        for (int i = 0; i < 13; i++) {
+            if(players[currentPlayerIndex].getTiles()[i].canFormChainWith(players[currentPlayerIndex].getTiles()[i+1])==1){
+                counter++;
+            }
+            else{
+                if(counter>=2){
+                    if(counter>=4){
+                        for (int j = i; j > i-5; j--) {
+                            Color.add(players[currentPlayerIndex].getTiles()[j]);
+                        }
+                    }
+                    else{
+                        for (int j = i; j > i-1-counter; j--) {
+                            Color.add(players[currentPlayerIndex].getTiles()[j]);
+                        }
+                    }
+                }
+                else{
+
+                }
+                counter=0;
+            }
+        }
+        counter=0;
+        players[currentPlayerIndex].sortTilesValueFirst();
+        for (int i = 0; i < 13; i++) {
+            if(players[currentPlayerIndex].getTiles()[i].canFormChainWith(players[currentPlayerIndex].getTiles()[i+1])==2){
+                counter++;
+            }
+            else{
+                if(counter>=2){
+                    if(counter>=4){
+                        for (int j = i; j > i-5; j--) {
+                            Color.add(players[currentPlayerIndex].getTiles()[j]);
+                        }
+                    }
+                    else{
+                        for (int j = i; j > i-1-counter; j--) {
+                            Color.add(players[currentPlayerIndex].getTiles()[j]);
+                        }
+                    }
+                }
+                else{
+
+                }
+                counter=0;
+            }
+        }
+        counter=0;
+        for (int i = 0; i < Color.size(); i++) {
+            for (int j = 0; j < Number.size(); j++) {
+                if(Color.get(i).matchingTiles(Number.get(j))){
+                    control = false;
+                    for (int k = 0; k < 14; k++) {
+                        if(players[currentPlayerIndex].getTiles()[k].matchingTiles(Color.get(i))){
+                            counter++;
+                        }
+                    }
+                    if((counter==2)){
+                        control = true;
+                    }
+                }
+            }
+        }
+        if(!(Color.size()+Number.size()==14)){
+            control = false;
+        }
+        return control;
+
+
+
+
+
+
+        /*currentPlayerIndex = getCurrentPlayerIndex();
 	    int counter3 = 0;
         int counter4 = 0;
         int counter5 = 0;
-        int[] longestChains = new int[players[currentPlayerIndex].playerTiles.length];
-        for (int i = 0; i < longestChains.length; i++)
-        {
-            if (longestChains[i] == 3)
-            {
-                counter3++;
-            }
-            else if (longestChains[i] == 4)
-            {
-                counter4++;
-            }
-            else if (longestChains[i] == 5)
-            {
-                counter5++;
+        int longestChains=0;
+        int max=0;
+        Tile[] temp = new Tile[5];
+        int count=0;
+        //int[] longestChains = new int[players[currentPlayerIndex].playerTiles.length];
+        Tile[] copy = new Tile[14];
+        for (int i = 0; i < copy.length; i++) {
+            copy[i] = players[currentPlayerIndex].getTiles()[i];
+        }
+        for (int i = 0; i < copy.length; i++) {
+            longestChains=players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].getTiles()[i]);
+            if(longestChains>=max){
+                max=players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].getTiles()[i]);
             }
         }
-        if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
+        for (int i = 0; i < copy.length; i++) {
+            
+        }*/
+        
+        /*for (int i = 0; i < longestChains.length; i++)
+        {
+            players[currentPlayerIndex].sortTilesColorFirst();
+            int a = 0;
+            while (a < longestChains.length)
+            {
+                longestChains[a] = players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].playerTiles[a]);
+                if (longestChains[a] == 3)
+                {
+                    counter3++;
+                    a = a + 3;
+                }
+                else if (longestChains[a] == 4)
+                {
+                    counter4++;
+                    a = a + 4;
+                }
+                else if (longestChains[a] == 5)
+                {
+                    counter5++;
+                    a = a + 5;
+                }
+            }
+
+            if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
+            {
+                end = true;
+            }
+            else
+            {
+                players[currentPlayerIndex].sortTilesValueFirst();
+                int b = 0;
+                while (b < longestChains.length)
+                {
+                    longestChains[b] = players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].playerTiles[b]);
+                    if (longestChains[b] == 3)
+                    {
+                        counter3++;
+                        b = b + 3;
+                    }
+                    else if (longestChains[b] == 4)
+                    {
+                        counter4++;
+                        b = b + 4;
+                    }
+                    else if (longestChains[b] == 5)
+                    {
+                        counter5++;
+                        b = b + 5;
+                    }
+                }
+                if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
+                {
+                    end = true;
+                }
+            }
+        }*/
+
+        /*if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
         {
             return true;
         }
-        return false;
+        return false;*/
     }
 
     /*
@@ -150,20 +291,24 @@ public class OkeyGame {
     public void pickTileForComputer() {
         Random rand = new Random();
         int r = rand.nextInt(2);
+        
         switch (r) 
         {
             case 0: String topTile = getTopTile(); 
             int newFromTopValue = Integer.parseInt(topTile.substring(0, topTile.length() - 1));
             char newFromTopColor = topTile.charAt(topTile.length() - 1);
+            
             Tile newTopTile = new Tile(newFromTopValue, newFromTopColor); 
-            players[currentPlayerIndex].addTile(newTopTile);
+            //players[currentPlayerIndex].addTile(newTopTile);
+            
             break;
             
             case 1: String discardedTile = getLastDiscardedTile(); 
             int newFromDiscardedValue = Integer.parseInt(discardedTile.substring(0, discardedTile.length() - 1));
             char newFromDiscardedColor = discardedTile.charAt(discardedTile.length() - 1);
+            
             Tile newDiscardedTile = new Tile(newFromDiscardedValue, newFromDiscardedColor);
-            players[currentPlayerIndex].addTile(newDiscardedTile);
+            
         }
     }
 
@@ -187,9 +332,9 @@ public class OkeyGame {
                 indexOfUselessTile = k;
             }
         }   
-        currentPlayer.getAndRemoveTile(indexOfUselessTile);
-        lastDiscardedTile = currentPlayer.playerTiles[indexOfUselessTile];
-        System.out.println("The discarded tile is :" + lastDiscardedTile);
+        lastDiscardedTile = currentPlayer.getAndRemoveTile(indexOfUselessTile);
+        //lastDiscardedTile = currentPlayer.playerTiles[indexOfUselessTile];
+        System.out.println("The discarded tile is : " + lastDiscardedTile);
     }
 
     /*
@@ -199,7 +344,7 @@ public class OkeyGame {
      */
     public void discardTile(int tileIndex) {
         lastDiscardedTile = players[currentPlayerIndex].getAndRemoveTile(tileIndex);
-        System.out.println(lastDiscardedTile);
+        System.out.println("The discarded tile is : " + lastDiscardedTile);
     }
 
     public void currentPlayerSortTilesColorFirst() {
