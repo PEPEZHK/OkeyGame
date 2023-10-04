@@ -118,26 +118,66 @@ public class OkeyGame {
         int counter4 = 0;
         int counter5 = 0;
         int[] longestChains = new int[players[currentPlayerIndex].playerTiles.length];
-        for (int i = 0; i < longestChains.length; i++)
+
+        boolean end = false;
+        if(!end)
         {
-            if (longestChains[i] == 3)
+            players[currentPlayerIndex].sortTilesColorFirst();
+            int a = 0;
+            while (a < longestChains.length)
             {
-                counter3++;
+                longestChains[a] = players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].playerTiles[a]);
+                if (longestChains[a] == 3)
+                {
+                    counter3++;
+                    a = a + 3;
+                }
+                else if (longestChains[a] == 4)
+                {
+                    counter4++;
+                    a = a + 4;
+                }
+                else if (longestChains[a] == 5)
+                {
+                    counter5++;
+                    a = a + 5;
+                }
             }
-            else if (longestChains[i] == 4)
+
+            if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
             {
-                counter4++;
+                end = true;
             }
-            else if (longestChains[i] == 5)
+            else
             {
-                counter5++;
+                players[currentPlayerIndex].sortTilesValueFirst();
+                int b = 0;
+                while (b < longestChains.length)
+                {
+                    longestChains[b] = players[currentPlayerIndex].findLongestChainOf(players[currentPlayerIndex].playerTiles[b]);
+                    if (longestChains[b] == 3)
+                    {
+                        counter3++;
+                        b = b + 3;
+                    }
+                    else if (longestChains[b] == 4)
+                    {
+                        counter4++;
+                        b = b + 4;
+                    }
+                    else if (longestChains[b] == 5)
+                    {
+                        counter5++;
+                        b = b + 5;
+                    }
+                }
+                if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
+                {
+                    end = true;
+                }
             }
         }
-        if(counter4 == 2 && counter3 == 2 || counter5 == 1 && counter3 == 3)
-        {
-            return true;
-        }
-        return false;
+        return end;
     }
 
     /*
